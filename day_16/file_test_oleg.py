@@ -1,5 +1,5 @@
 from heapq import heappush, heappop
-
+from math import inf
 from collections import defaultdict
 
 paths = []
@@ -57,13 +57,13 @@ def advance(p, vs):
 
 
 
-get_way_sum(st_point,end_point,">", fld_ful)
+# get_way_sum(st_point,end_point,">", fld_ful)
 
 
 def get_min_way(start_pos, end_pos, east,fld):
     # тут стоимость для пары (pos, dp)
-    # score_at_pos = defaultdict(lambda: +inf)
-    score_at_pos = {}
+    score_at_pos = defaultdict(lambda: +inf)
+
     # тут словарь всех точек для каждой стоимости
     total_len = defaultdict(lambda: set())
     paths2 = []
@@ -80,25 +80,16 @@ def get_min_way(start_pos, end_pos, east,fld):
             ndp = apply(dp, rotation)
             np = advance(p, ndp)
             ns = score + penalty
-            if np not in seen and fld[np] != '#':
-                if np == (130,1):
-                    print()
+            if np not in seen and fld.get(np) and fld[np] != '#':
                 flt_key = (np, ndp)
                 # эвристика для исключения дохлых вариантов
-                # if score_at_pos[flt_key] >= ns:
-                #     heappush(paths, (ns, seen | {np}, ndp, np))
-                # # обновим стоимость, если меньше
-                # score_at_pos[flt_key] = min(score_at_pos[flt_key], ns)
-
-                # эвристика для исключения дохлых вариантов
-                if score_at_pos.get(flt_key, 100000000000)  >= ns:
+                if score_at_pos[flt_key] >= ns:
                     heappush(paths2, (ns, seen | {np}, ndp, np))
-                    # обновим стоимость, если меньше
-                    score_at_pos[flt_key] = min(score_at_pos.get(flt_key, 100000000000), ns)
-                else:
-                    score_at_pos[flt_key] = ns
+                # обновим стоимость, если меньше
+                score_at_pos[flt_key] = min(score_at_pos[flt_key], ns)
 
-                # А вот и ответ на обе части
+
+    # А вот и ответ на обе части
     min_p = min(total_len.keys())
     print(f'Part A: {min_p}')
     print(f'Part B: {len(total_len[min_p])}')

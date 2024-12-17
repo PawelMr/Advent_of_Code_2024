@@ -32,9 +32,7 @@ def dijkstra(grid, starts):
         if dist[(row, col, direction)] < d:
             continue
         for next_dir in "EWNS".replace(direction, ""):
-            if (row, col, next_dir) not in dist or dist[
-                (row, col, next_dir)
-            ] > d + 1000:
+            if (row, col, next_dir) not in dist or dist[(row, col, next_dir)] > d + 1000:
                 dist[(row, col, next_dir)] = d + 1000
                 heapq.heappush(pq, (d + 1000, row, col, next_dir))
         dr, dc = delta[direction]
