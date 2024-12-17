@@ -1,0 +1,66 @@
+import copy
+import re
+import collections
+import time
+
+
+with open("input.txt", mode="r", encoding="utf-8") as test_file:
+    list_txt = test_file.readlines()
+
+def disassemble_into_numbers(string):
+    pattern = r'(\d+)'
+    number_txt_list = re.findall(pattern, string)
+    number_list = [int(i) for i in number_txt_list]
+    return number_list
+
+
+def check_the_rules(a, step):
+    if a==0:
+        return [(1, step+1)]
+    if len(str(a))%2 ==0:
+        return [(int(str(a)[:len(str(a))//2]), step+1), (int(str(a)[len(str(a))//2:]), step+1)]
+    else:
+        return [(a*2024, step+1)]
+
+def make_conversion (list_element, n_step):
+    sum_element = 0
+    while list_element:
+        element = list_element.pop(-1)
+        # print(element)
+        if element[1] == n_step:
+            sum_element+=1
+            continue
+        else :
+            list_new_element = check_the_rules(element[0], element[1])
+            if list_new_element[0][1] == n_step:
+                sum_element += len(list_new_element)
+                continue
+            else :
+                list_element.extend(list_new_element)
+    return sum_element
+
+time_start = time.time()
+
+start_cart =[(i,0) for i in disassemble_into_numbers(list_txt[0])]
+stone_cart = copy.deepcopy(start_cart)
+sum_stone = make_conversion(stone_cart,25)
+
+
+time_finish = time.time()
+execution_time = time_finish - time_start
+print(f"Решение задания 1: {sum_stone} \n Время Решения:{execution_time}")
+
+
+time_start = time.time()
+
+# start_cart =[(i,0) for i in disassemble_into_numbers(list_txt[0])]
+# stone_cart = copy.deepcopy(start_cart)
+# sum_stone = make_conversion(stone_cart,75)
+
+time_finish = time.time()
+execution_time = time_finish - time_start
+print(f"Решение задания 1: {sum_stone} \n Время Решения:{execution_time}")
+
+
+
+
