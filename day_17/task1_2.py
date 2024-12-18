@@ -102,7 +102,7 @@ class Computer:
             self.ind_operation +=1
 
 
-def test(a, b, c, program):
+def prob(a, b, c, program):
     test_cl = Computer(a, b, c, program)
     test_cl.perform_program()
     print(test_cl.output)
@@ -111,17 +111,17 @@ def test(a, b, c, program):
 
 
 # print("\nтест1")
-# test(0, 0, 9,[2,6])
+# prob(0, 0, 9,[2,6])
 # print("\nтест2")
-# test(10, 0, 0, [5,0,5,1,5,4])
+# prob(10, 0, 0, [5,0,5,1,5,4])
 # print("\nтест3")
-# test(2024, 0, 0, [0,1,5,4,3,0])
+# prob(2024, 0, 0, [0,1,5,4,3,0])
 # print("\nтест4")
-# test(0, 29, 0, [1,7])
+# prob(0, 29, 0, [1,7])
 # print("\nтест5")
-# test(0, 2024, 43690, [4,0])
+# prob(0, 2024, 43690, [4,0])
 # print("\nтест6")
-# test(729, 0, 0, [0,1,5,4,3,0])
+# prob(729, 0, 0, [0,1,5,4,3,0])
 
 
 time_start = time.time()

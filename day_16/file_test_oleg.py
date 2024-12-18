@@ -2,6 +2,8 @@ from heapq import heappush, heappop
 from math import inf
 from collections import defaultdict
 
+
+# https://online.sbis.ru/news/87e77d78-fdab-4926-83b0-1ffdbb71f3dc
 paths = []
 # элемент очереди:
 # 1. стоимость

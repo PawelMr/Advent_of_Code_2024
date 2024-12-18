@@ -139,7 +139,7 @@ def reverseDebugger(
     print(answer)
 
 
-def tests():
+def prob():
     runDebugger(0, 0, 9, "2,6")
     runDebugger(10, 0, 0, "5,0,5,1,5,4")
     runDebugger(2024, 0, 0, "0,1,5,4,3,0")
@@ -150,7 +150,7 @@ def tests():
 
 
 def main():
-    # tests()
+    # prob()
 
     print(runDebugger(65804993, 0, 0, "2,4,1,1,7,5,1,4,0,3,4,5,5,5,3,0"))
     # https://github.com/tade3910/Advent_Of_Code_2024/blob/main/day17/script.py
