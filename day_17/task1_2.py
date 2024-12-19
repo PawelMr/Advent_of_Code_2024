@@ -74,7 +74,7 @@ class Computer:
             raise Exception(f"ошибка в операторе {value}")
 
     def perform_operation(self, instruction, int_opr):
-        print(f"{instruction}  ===  {self.output} , reg = {self.reg_a}, {self.reg_b}, {self.reg_c},")
+        # print(f"{instruction}  ===  {self.output} , reg = {self.reg_a}, {self.reg_b}, {self.reg_c},")
         opr = self.get_opr(int_opr)
         if instruction == 0:
             self.adv(opr)
@@ -133,12 +133,28 @@ time_finish = time.time()
 execution_time = time_finish - time_start
 print(f"Решение задания 1: {str_res} \n Время Решения:{execution_time}")
 
+def reconstruction(list_pr):
+    version_reg_a = [0]
+    for i in range(1, len(list_pr)+1):
+        new_ver = []
+        for num in version_reg_a:
+            for tail in range(8):
+                ver = 8*num+ tail
+                task = Computer(ver, 0, 0, list_pr)
+                task.perform_program()
+                res_task = task.output
+                if res_task == list_pr[-i:]:
+                    new_ver.append(ver)
+        version_reg_a = new_ver
+    return min(version_reg_a)
+
+
 
 time_start = time.time()
-
+reg_a = reconstruction([2,4,1,5,7,5,4,3,1,6,0,3,5,5,3,0])
 time_finish = time.time()
 execution_time = time_finish - time_start
-print(f"Решение задания 2: {0} \n Время Решения:{execution_time}")
+print(f"Решение задания 2: {reg_a} \n Время Решения:{execution_time}")
 
 
 

@@ -119,8 +119,7 @@ def runDebugger(a: int, b: int, c: int, programStr: str):
     return debugger.output
 
 
-def reverseDebugger(
-        input: str):  # The debugger works on the last 3 bits then goes to the second to last 3 bits and so on
+def reverseDebugger(input: str):  # The debugger works on the last 3 bits then goes to the second to last 3 bits and so on
     program = programStringToList(input)
     programLength = len(program)
     valid = [0]
@@ -140,17 +139,17 @@ def reverseDebugger(
 
 
 def prob():
-    runDebugger(0, 0, 9, "2,6")
-    runDebugger(10, 0, 0, "5,0,5,1,5,4")
-    runDebugger(2024, 0, 0, "0,1,5,4,3,0")
-    runDebugger(0, 29, 0, "1,7")
-    runDebugger(0, 2024, 43690, "4,0")
-    runDebugger(729, 0, 0, "0,1,5,4,3,0")
+    # runDebugger(0, 0, 9, "2,6")
+    # runDebugger(10, 0, 0, "5,0,5,1,5,4")
+    # runDebugger(2024, 0, 0, "0,1,5,4,3,0")
+    # runDebugger(0, 29, 0, "1,7")
+    # runDebugger(0, 2024, 43690, "4,0")
+    # runDebugger(729, 0, 0, "0,1,5,4,3,0")
     reverseDebugger("0,3,5,4,3,0")
 
 
 def main():
-    # prob()
+    prob()
 
     print(runDebugger(65804993, 0, 0, "2,4,1,1,7,5,1,4,0,3,4,5,5,5,3,0"))
     # https://github.com/tade3910/Advent_Of_Code_2024/blob/main/day17/script.py
