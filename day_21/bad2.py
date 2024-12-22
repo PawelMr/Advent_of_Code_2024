@@ -13,7 +13,7 @@ def sub(p1,p2):
     return tuple(a-b for a,b in zip(p1,p2))
 timer_parse_start=perf_counter()
 ############################## PARSER ##############################
-with open("test.txt") as file:
+with open("input.txt") as file:
     lines = file.read().splitlines()
 num_pad_lines = """
 789

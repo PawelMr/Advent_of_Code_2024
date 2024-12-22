@@ -5,7 +5,7 @@ from heapq import heappush, heappop
 import time
 
 
-with open("test.txt", mode="r", encoding="utf-8") as test_file:
+with open("input.txt", mode="r", encoding="utf-8") as test_file:
     list_txt = test_file.readlines()
     list_txt = [i.rstrip() for i in list_txt]
 
@@ -46,40 +46,55 @@ def parse_string_in_c(cod: str, kl = kl1):
         list_c.append((x, y))
     return list_c
 
-def pars_2_kl(ldc):
+def pars_2_kl_22222(ldc):
     stro = ""
     for dc in ldc:
         dx = dc[0]
         dy = dc[1]
-        if dx>0:
-            strx = ">"*dx
-        else:
-            strx = "<" * (-1*dx)
-        if dy>0:
-            stry = "v"*dy
-        else:
-            stry = "^" * (-1*dy)
-        stro +=strx+stry+ "A"
+        strx = "<" * -dx + ">" * dx
+        stry = "^" * -dy + "v" * dy
+        stro += strx + stry + "A" if dy < 0 and dx < 0 else stry + strx + "A"
     return stro
 
-def delta_c(coordinates):
-    list_d = []
+def pars_2_kl(source, target, kl = kl1):
+    minx, maxx, miny, maxy = (0, 3, 0, 3) if kl == kl1 else (0, 3, -1, 0)
+    tx,ty = target
+    sx,sy = source
+    dx = tx - sx
+    dy = ty - sy
+    vert = "v"*dx+"^"*-dx
+    horiz = ">"*dy+"<"*-dy
+    if dy > 0 and minx<=tx<=maxx and miny<=sy<=maxy:
+        return vert+horiz+"A"
+    if minx<=sx<=maxx and miny<=ty<=maxy:
+        return horiz+vert+"A"
+    if minx<=tx<=maxx and miny<=sy<=maxy:
+        return vert+horiz+"A"
+
+def delta_c(coordinates, kl= kl1):
+    nkl = ""
     for i in range(1, len(coordinates)):
-        dx = coordinates[i - 1][0] - coordinates[i][0]
-        dy = coordinates[i - 1][1] - coordinates[i][1]
-        list_d.append((dx, dy))
-    return(list_d)
+        if coordinates[i - 1] == coordinates[i]:
+            nkl+="A"
+        else:
+            try:
+                nkl += pars_2_kl(coordinates[i - 1],coordinates[i], kl)
+            except:
+                print()
+                pars_2_kl(coordinates[i - 1], coordinates[i], kl)
+
+    return nkl
 
 def rough_score(txts)     :
     c = parse_string_in_c(txts)
-    sd = delta_c(c)
-    k = pars_2_kl(sd)
+    k = delta_c(c)
+
     c2 = parse_string_in_c(k,kl2)
-    sd2 = delta_c(c2)
-    k2 = pars_2_kl(sd2)
+    k2 = delta_c(c2,kl2)
+
     c3 = parse_string_in_c(k2,kl2)
-    sd3 = delta_c(c3)
-    k3 = pars_2_kl(sd3)
+    k3 = delta_c(c3,kl2)
+
     return len(k3)* disassemble_into_numbers(txts)[0]
 
 time_start = time.time()
