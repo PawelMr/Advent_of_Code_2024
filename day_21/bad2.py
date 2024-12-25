@@ -76,7 +76,7 @@ def route_len(route):
     return sum(len(k)*v for k,v in route.items())
 
 robot_routes = [Counter([route]) for route in num_routes]
-for _ in range(25):
+for _ in range(4):
     new_routes = []
     for route_counter in robot_routes:
         new_route = Counter()
