@@ -70,7 +70,7 @@ def pars_2_kl(source, target, kl = kl1):
         return vert + horiz + "A"
     elif (sx,ty)!=null:
         return vert + horiz + "A"
-    elif dx>0 and (tx,sy) != null:
+    elif  (tx,sy) != null:
         return horiz+vert+ "A"
 
     else:
